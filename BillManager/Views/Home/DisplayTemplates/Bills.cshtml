@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BillManager.Models.BillEntry>
+
+@foreach (BillManager.Models.BillEntry bill in Model)
+{
+    <p>@bill.Name</p>
+    <p>@bill.Amount</p>
+    <p>@bill.DueDate</p>
+
+}
