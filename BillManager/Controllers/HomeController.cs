@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BillManager.Models;
+using System.Data.SQLite;
+
 
 namespace BillManager.Controllers
 {
@@ -11,17 +13,6 @@ namespace BillManager.Controllers
     {
         public ActionResult Index()
         {
-            //var billsList = new List<BillEntry>();
-
-            //BillEntry newBill = new BillEntry
-            //{
-            //    Name = "Test",
-            //    Amount = 10.45,
-            //    DueDate = new DateTime(2021, 12, 25)
-            //};
-
-            //billsList.Add(newBill);
-
             var bill = new BillEntry();
 
 
@@ -32,8 +23,15 @@ namespace BillManager.Controllers
         public ActionResult Index(BillEntry entry)
         {
             BillEntry.addBill(entry.Name, entry.Amount, entry.DueDate);
+            BillEntry.SendMessage(String.Format("New bill: {0}\nAmount: ${1} each\nDue date: {2}", entry.Name, Math.Round(entry.Amount / 2, 2), entry.DueDate.ToString("MM/dd/yyyy")));
 
             return View();
         }
+
+        public ActionResult History()
+        {
+            return View(BillEntry.GetBillEntries());
+        }
     }
+
 }

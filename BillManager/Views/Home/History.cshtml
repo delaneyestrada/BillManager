@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BillManager.Models.BillEntry>
+
+@{
+    ViewBag.Title = "History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>History</h2>
+<div>
+    @foreach (var bill in Model)
+    {
+    <div class="bill-entry">
+        <div>
+            <span><strong>Name: </strong>@bill.Name</span>
+        </div>
+        <div>
+            <span><strong>Due: </strong>@(bill.DueDate.ToString("MM/dd/yyyy"))</span>
+        </div>
+        <div>
+            <span><strong>Amount: </strong>$@bill.Amount</span>
+        </div>
+        <div>
+            <span><strong>Each: </strong>$@(Math.Round(bill.Amount / 2, 2))</span>
+        </div>
+    </div>
+    }
+</div>
+
